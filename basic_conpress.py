@@ -1,9 +1,9 @@
 import zstd
+import sys
 
+infile = sys.argv[1]
+outfile = sys.argv[2]
 
-
-
-where = "/home/bence/Documents/"
 cctx = zstd.ZstdCompressor()
-with open(where+"example.txt",'rb') as ifh, open(where+"example.zstd",'wb') as ofh:
+with open(infile,'rb') as ifh, open(outfile,'wb') as ofh:
 	cctx.copy_stream(ifh,ofh)
