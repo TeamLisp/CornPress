@@ -1,10 +1,13 @@
-# **CornPress (Demo)**
+**CornPress (Demo)**
 
-## Linux:
-## futtatás: bin/project1
+Linux:
+```
+futtatás: bin/project1
+```
 
-## Windows
-## futtatás: bin/project1.exe
-#
-#
-# Enjoy!
+Windows
+```
+futtatás: bin/project1.exe
+```
+
+Enjoy!
