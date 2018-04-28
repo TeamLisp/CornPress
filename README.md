@@ -8,6 +8,7 @@ First install zstd for your python:
 - python setup.py build_ext clean
 
 **Futtatás**
+
 Linux:
 ```
 CornPress
