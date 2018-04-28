@@ -7,15 +7,15 @@ First install zstd for your python:
 - apt-get install python-dev python3-dev python-setuptools python3-setuptools
 - python setup.py build_ext clean
 
+**Futtatás**
 Linux:
 ```
-futtatás: bin/project1
+CornPress
 ```
-TODO
 
-Windows
+Windows:
 ```
-futtatás: bin/project1.exe
+CornPress.exe
 ```
 
 Enjoy!
