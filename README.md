@@ -9,12 +9,12 @@ First install zstd for your python:
 
 **Futtatás**
 
-Linux:
+- Linux:
 ```
 CornPress
 ```
 
-Windows:
+- Windows:
 ```
 CornPress.exe
 ```
