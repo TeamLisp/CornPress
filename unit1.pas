@@ -40,6 +40,7 @@ type
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
     Splitter1: TSplitter;
     StatusBar1: TStatusBar;
     StatusBar2: TStatusBar;
@@ -62,7 +63,9 @@ type
     procedure MenuItem7Click(Sender: TObject);
     procedure MenuItem8Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
     procedure Szamol;
+    procedure funkcio(funkc: Integer);
     function FileSizeFormat(bytes:Double):string;
     procedure ListView2DblClick(Sender: TObject);
     procedure ListView2SelectItem(Sender: TObject; Item: TListItem;
@@ -96,6 +99,7 @@ implementation
 procedure TForm1.Listaz;
 var
   SR: TSearchRec;
+  SA: TStringArray;
 begin
   ListView1.Clear;
   c := 0;
@@ -126,7 +130,12 @@ begin
           Caption:=SR.Name;
           inc(c);
           SubItems.Text:=FileSizeFormat(SR.Size)+#13+FormatDateTime('yyyy mm dd hh:mm:ss',fileDateToDateTime(SR.Time));
+          SA := Caption.Split('.');
           ImageIndex:=1;
+          if Length(SA)>1 then begin
+            if SA[Length(SA)-1] = 'zstd' then ImageIndex:=3;
+            if SA[Length(SA)-1] = 'cp'   then ImageIndex:=4;
+          end;
         end;
       end;
     until FindNext(SR)<>0;
@@ -181,13 +190,15 @@ begin
   ListView1.Column[2].Visible := not ListView1.Column[2].Visible;
 end;
 
-procedure TForm1.SpeedButton3Click(Sender: TObject);
+procedure TForm1.funkcio(funkc: Integer);
 var
   i           : Integer;
   iniFile     : TextFile;
   fName, cmd  : String;
+  line        : String;
   AProcess    : TProcess;
   AStringList : TStringList;
+  SA          : TStringArray;
 begin
   cmd := '';
   {$IFDEF UNIX}
@@ -196,14 +207,24 @@ begin
   {$IFDEF WINDOWS}
     fName := 'win.ini';
   {$ENDIF}
-  AssignFile(iniFile, fname);
+  AssignFile(iniFile, fName);
   Reset(iniFile);
   while not EOF(iniFile) do
-    ReadLn(iniFile, cmd);
+  begin
+    ReadLn(iniFile, line);
+    SA := line.Split(';');
+    if Length(SA) > 1 then
+      if SA[0].IndexOf('#') < 0 then
+        if StrToInt(SA[0]) = funkc then
+        cmd := SA[1];
+  end;
   CloseFile(iniFile);
 
-  for i:=0 to ListView2.Items.Count-1 do
-    cmd := cmd + ' "' + ListView2.Items.Item[i].Caption + '"';
+  case funkc of
+    0,2: for i:=0 to ListView2.Items.Count-1 do
+         cmd := cmd + ' "' + ListView2.Items.Item[i].Caption + '"';
+    1,3: cmd := cmd + ' "' + ListView1.Items.Item[ListView1.ItemIndex].Caption + '"';
+  end;
 
   ShowMessage(cmd);
 
@@ -224,6 +245,17 @@ begin
   ListView1.Refresh;
   Listaz;
   Szamol;
+end;
+
+
+procedure TForm1.SpeedButton3Click(Sender: TObject);
+begin
+  funkcio(0);
+end;
+
+procedure TForm1.SpeedButton4Click(Sender: TObject);
+begin
+  funkcio(2);
 end;
 
 function TForm1.FileSizeFormat(bytes:Double):string;
@@ -264,6 +296,7 @@ begin
     SpeedButton3.Enabled := True
   else
     SpeedButton3.Enabled := False;
+  SpeedButton4.Enabled := SpeedButton3.Enabled;
 end;
 
 procedure TForm1.ListView2DblClick(Sender: TObject);
@@ -353,17 +386,32 @@ var
 begin
   if ListView1.ItemIndex > -1 then begin
     s := ListView1.Selected.Caption;
-    if ListView1.Selected.ImageIndex <> 1 then begin
-      Edit1.Text := Edit1.Text+s+per;
-      Listaz;
-    end else
-      with ListView2.Items.Add do
-        begin
-          Caption:=Edit1.Text+s;
-          SubItems.Text := ListView1.Selected.SubItems.Text;
-          ImageIndex:=1;
-          Szamol;
-        end;
+    case ListView1.Selected.ImageIndex of
+      0,2: begin
+             Edit1.Text := Edit1.Text+s+per;
+             Listaz;
+           end;
+      1  : with ListView2.Items.Add do
+             begin
+               Caption:=Edit1.Text+s;
+               SubItems.Text := ListView1.Selected.SubItems.Text;
+               ImageIndex:=1;
+               Szamol;
+             end;
+      3  : case QuestionDlg ('CornPress','Valóban ki akarod csomagolni ezt az állományt? '+#10#13#10#13+s,mtCustom,[mrNo, 'Nem', mrYes,'Igen', 'IsDefault'],'') of
+             mrYes: begin
+                      funkcio(1);
+                      QuestionDlg ('CornPress','Kész!',mtCustom,[mrOK,'OK'],'');
+                    end;
+           end;
+      4  : case QuestionDlg ('CornPress','xD Valóban ki akarod csomagolni ezt az állományt? '+#10#13#10#13+s,mtCustom,[mrNo, 'Nem', mrYes,'Hát hogy a francba ne!', 'IsDefault'],'') of
+             mrYes: begin
+                      funkcio(3);
+                      QuestionDlg ('CornPress','Kész!',mtCustom,[mrOK,'OK'],'');
+                    end;
+           end;
+    end;
+
     if s = '..' then begin
       s := StringReplace(Edit1.Text,per+'..','',[rfReplaceAll]);
       i := s.Length-1;
