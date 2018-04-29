@@ -12,7 +12,15 @@ First install zstd for your python:
   - if the upper fails
     - download zstd whl from https://pypi.org/project/zstandard/#files
     - python -m pip install [downloaded .whl]
+
+**Usage of Extender and Deextender**
+  - Extender
+    - python extender.py infile.zstd [random]
+      - random: 1 out of random chance for extend
+  - Deextender
+    - python deextender.py infile.cp outfile.zstd
     
+
 **Futtatás**
 
 - Linux:
