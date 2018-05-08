@@ -29,3 +29,5 @@ if len(sys.argv) > 2 :
 else :
 	compr.lets_press(sys.argv[1])
 
+print "Your file is cornpessed!"
+
