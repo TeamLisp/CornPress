@@ -19,3 +19,4 @@ class Deextender:
 if __name__ == '__main__':
 	deext = Deextender();
 	deext.decornpress(sys.argv[1], sys.argv[2])
+	print "Print, hogy Sanyi oruljon"

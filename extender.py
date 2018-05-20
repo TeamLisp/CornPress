@@ -22,3 +22,4 @@ class Extender:
 if __name__ == '__main__':
 	ext = Extender();
 	ext.cornpress(sys.argv[1], sys.argv[2])
+	print "Print, hogy Sanyi oruljon"
