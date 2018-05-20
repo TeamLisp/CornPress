@@ -9,6 +9,7 @@ import deextender as deext
 class ZstdTestCase(unittest.TestCase):
     comp = compress.ZstdCompresser()
     decomp = decompress.ZstdDecomp()
+    windows = os.name == 'nt'
     
     def tearDown(self) :
         files = os.listdir("test")
@@ -17,9 +18,12 @@ class ZstdTestCase(unittest.TestCase):
                 os.remove(os.path.join("test",file))
     
     def test_small_file(self):
-        os.system("cp test/small_file test/small_file_test")
+        if self.windows :
+            os.system("copy test/small_file test/small_file_test")
+        else :
+            os.system("cp test/small_file test/small_file_test")
         self.comp.lets_press("test/small_file")
-        os.system("rm test/small_file")
+        os.remove("test/small_file")
         self.decomp.lets_decomp("test/small_file.zstd")
         
         with open("test/small_file_test", "rb") as small_file_test:
@@ -30,9 +34,12 @@ class ZstdTestCase(unittest.TestCase):
         self.assertEquals(test_lines, zstd_lines)
  
     def test_large_file(self):
-        os.system("cp test/large_file test/large_file_test")
+        if self.windows :
+            os.system("copy test/large_file test/large_file_test")
+        else :
+            os.system("cp test/large_file test/large_file_test")
         self.comp.lets_press("test/large_file")
-        os.system("rm test/large_file")
+        os.remove("test/large_file")
         self.decomp.lets_decomp("test/large_file.zstd")
         
         with open("test/large_file_test", "rb") as large_file_test:
@@ -43,9 +50,12 @@ class ZstdTestCase(unittest.TestCase):
         self.assertEquals(test_lines, zstd_lines)
         
     def test_non_ascii_file(self):
-        os.system("cp test/non_ascii test/non_ascii_test")
+        if self.windows :
+            os.system("copy test/non_ascii test/non_ascii_test")
+        else :
+            os.system("cp test/non_ascii test/non_ascii_test")
         self.comp.lets_press("test/non_ascii")
-        os.system("rm test/non_ascii")
+        os.remove("test/non_ascii")
         self.decomp.lets_decomp("test/non_ascii.zstd")
         
         with open("test/non_ascii_test", "rb") as non_ascii_test:
