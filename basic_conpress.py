@@ -28,4 +28,4 @@ if __name__ == '__main__':
     else :
         compr.lets_press(sys.argv[1])
 
-    print "Your file is cornpessed!"
+    print "Your file is cornpressed!"
