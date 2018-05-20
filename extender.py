@@ -15,8 +15,10 @@ class Extender:
 				file.write("\nCornPressCornPressCornPressCornPress\n")
 				file.write("Sanyiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
 				file.close()
-		
-		os.rename(infile, (os.path.dirname(infile) + "\\" + (os.path.splitext(os.path.basename(infile))[0]) + ".cp"))
+		if self.windows :
+            os.rename(infile, (os.path.dirname(infile) + "\\" + (os.path.splitext(os.path.basename(infile))[0]) + ".cp"))
+        else :
+			os.rename(infile, (os.path.dirname(infile) + "/" + (os.path.splitext(os.path.basename(infile))[0]) + ".cp"))
 
 	def gui_cornpress(self, infile):
 		self.cornpress(infile, 10)
