@@ -18,7 +18,10 @@ class Extender:
 		
 		os.rename(infile, (os.path.dirname(infile) + "\\" + (os.path.splitext(os.path.basename(infile))[0]) + ".cp"))
 
+	def gui_cornpress(self, infile):
+		self.cornpress(infile, 10)
+		
 if __name__ == '__main__':
 	ext = Extender();
-	ext.cornpress(sys.argv[1], sys.argv[2])
+	ext.gui_cornpress(sys.argv[1])
 	print "Print, hogy Sanyi oruljon"
