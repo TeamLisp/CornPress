@@ -21,12 +21,12 @@ class ZstdDecomp:
 				self.cctx.copy_stream(ifh,ofh)
 
 
+if __name__ == '__main__':
+    compr = ZstdDecomp()
 
-compr = ZstdDecomp()
+    if len(sys.argv) > 2 :
+        compr.lets_multy(sys.argv[1:])
+    else :
+        compr.lets_decomp(sys.argv[1])
 
-if len(sys.argv) > 2 :
-	compr.lets_multy(sys.argv[1:])
-else :
-	compr.lets_decomp(sys.argv[1])
-
-print "Your file is decornpressed!"
+    print "Your file is decornpressed!"

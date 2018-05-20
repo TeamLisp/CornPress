@@ -21,13 +21,11 @@ class ZstdCompresser:
 				self.cctx.copy_stream(ifh,ofh)
 
 
+if __name__ == '__main__':
+    compr = ZstdCompresser()
+    if len(sys.argv) > 2 :
+        compr.lets_multy(sys.argv[1:])
+    else :
+        compr.lets_press(sys.argv[1])
 
-compr = ZstdCompresser()
-
-if len(sys.argv) > 2 :
-	compr.lets_multy(sys.argv[1:])
-else :
-	compr.lets_press(sys.argv[1])
-
-print "Your file is cornpessed!"
-
+    print "Your file is cornpessed!"

@@ -1,0 +1,27 @@
+Az Operációs rendszerek tárgy a 2008-as BSC tanrend része. A tantárgyat a programtervező informatikus BSC szak IV. vagy V. félévében kötelező elvégezni.
+A tárgy órabeosztása 2+1. Előadások és gyakorlatok keretében mélyítjük el a tananyagot.
+
+A tárgy elvégzése során a megfelelő ismeretanyagot átadva, a célunk az, hogy a hallgató:
+
+    ismerje az operációs rendszerek alapjait
+        ismerje az operációs rendszer fogalmát, feladatát, tervezési célkitűzéseit, felhasználási kategóriáit, a rendszerhívások alapjait, alkalmazási felületét.
+        ismerje a folyamatok, folyamatleíró, folyamattáblázat fogalmát, megvalósítását, szálak fogalmát, megvalósítását, szálak-folyamatok közti alapvető különbségeket
+        legyen tisztában a folyamatok és ütemezések alapjaival, ütemezési alapalgoritmusokkal 
+        ismerje a párhuzamosság alapjait, versenyhelyzetek, kritikus szekciók, szemaforok, monitorok, holtpontok fogalmait, alapvető tulajdonságait
+        ismerje az alapvető memóriakezelési módszereket, virtuális memória fogalmát, megvalósítási módjait, alapvető virtuális memóriakezelési algoritmusokat
+        Bemenet/kimenet ütemezési algoritmusokat, állományrendszerek szolgáltatásait, megvalósítását
+
+    használja az operációs rendszer (Linux, Windows) adta alap lehetőségeket
+        használja az operáció rendszer parancs és grafikus felületét
+        ismerje a rendszerkönyvtárak elérhetőségét, alapvető fájlrendszerbeli hívásokat
+        használja a folyamatkezelő hívásokat (fork, execv, kill stb)
+        legyen képes a párhuzamos folyamatok kritikus szekcióit szemafor használattal biztosítani
+        ismerje az osztott memória, alapvető hálózati lehetőségek(socket) használatát
+
+    legyen képes alapvető operációs "rendszerközeli" programok készítésére
+        használja a megfelelő C, C++ fordítót (GNU, cc, gcc)
+        ismeri az alapvető fájlrendszer manipuláló rendszerhívásokat
+        használja a folyamatkezelési rendszerhívásokat (fork, kill, execv …)
+        használja az alapvető üzenetküldő rendszerhívásokat..)
+        tudjon olyan programokat írni, melyek osztott memória, csővezeték, vagy hálózati kapcsolaton keresztül végzik az adataik cseréjét.
+ 
