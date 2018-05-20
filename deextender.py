@@ -16,7 +16,9 @@ class Deextender:
 		infile.close()
 		outfile.close()
 
+	def gui_decornpress(self, in_infile):
+		self.decornpress(in_infile, (os.path.dirname(in_infile) + "\\" + (os.path.splitext(os.path.basename(in_infile))[0]) + ".zstd"))
 if __name__ == '__main__':
 	deext = Deextender();
-	deext.decornpress(sys.argv[1], sys.argv[2])
+	deext.gui_decornpress(sys.argv[1])
 	print "Print, hogy Sanyi oruljon"
