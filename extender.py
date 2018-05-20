@@ -2,21 +2,23 @@ import sys
 import random
 import os
 
-rnd = random.randint(0, int(sys.argv[2]))
-isdir = os.path.isdir(sys.argv[1])
+class Extender:
+	def cornpress(self, infile, number):
+		rnd = random.randint(0, int(number))
+		isdir = os.path.isdir(infile)
+		
+		if rnd == int(number):
+			if isdir:
+				print "a"
+			else:
+				file = open(infile, "a")
+				file.write("\nCornPressCornPressCornPressCornPress\n")
+				file.write("Sanyiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+				file.close()
+		
+		os.rename(infile, (os.path.dirname(infile) + "\\" + (os.path.splitext(os.path.basename(infile))[0]) + ".cp"))
 
-print rnd
-print int(sys.argv[2])
-print os.path.dirname(sys.argv[1])
-print (os.path.splitext(os.path.basename(sys.argv[1]))[0])
 
-if rnd == int(sys.argv[2]):
-	if isdir:
-		print "a"
-	else:
-		file = open(sys.argv[1], "a")
-		file.write("\nCornPressCornPressCornPressCornPress\n")
-		file.write("Sanyiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-		file.close()
-
-os.rename(sys.argv[1], (os.path.dirname(sys.argv[1]) + "\\" + (os.path.splitext(os.path.basename(sys.argv[1]))[0]) + ".cp"))
+if __name__ == '__main__':
+	ext = Extender();
+	ext.cornpress(sys.argv[1], sys.argv[2])
