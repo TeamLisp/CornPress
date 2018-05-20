@@ -7,6 +7,7 @@ First install zstd for your python:
   - apt-get install python-dev python3-dev python-setuptools python3-setuptools
   - python setup.py build_ext clean
   - pip install zstandard
+  - chmod 777 CornPress
 
 - Windows
   - python -m pip install zstd
