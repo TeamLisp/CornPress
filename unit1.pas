@@ -223,7 +223,7 @@ begin
   case funkc of
     0     : for i:=0 to ListView2.Items.Count-1 do
               cmd := cmd + ' "' + ListView2.Items.Item[i].Caption + '"';
-    1,2,3 : cmd := cmd + ' "' + ListView1.Items.Item[ListView1.ItemIndex].Caption + '"';
+    1,2,3 : cmd := cmd + ' "' + Edit1.Text + ListView1.Items.Item[ListView1.ItemIndex].Caption + '"';
   end;
 
   ShowMessage(cmd);
