@@ -1,17 +1,17 @@
 object Form1: TForm1
-  Left = 344
+  Left = 332
   Height = 657
-  Top = 179
+  Top = 259
   Width = 1169
   Caption = 'CornPress'
-  ClientHeight = 629
+  ClientHeight = 637
   ClientWidth = 1169
   Menu = MainMenu1
   OnCreate = FormCreate
   LCLVersion = '1.8.2.0'
   object Splitter1: TSplitter
     Left = 570
-    Height = 609
+    Height = 614
     Top = 0
     Width = 3
     Align = alRight
@@ -19,17 +19,17 @@ object Form1: TForm1
   end
   object Panel2: TPanel
     Left = 0
-    Height = 609
+    Height = 614
     Top = 0
     Width = 570
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 609
+    ClientHeight = 614
     ClientWidth = 570
     TabOrder = 1
     object ListView1: TListView
       Left = 0
-      Height = 586
+      Height = 591
       Top = 23
       Width = 570
       Align = alClient
@@ -96,17 +96,17 @@ object Form1: TForm1
   end
   object Panel4: TPanel
     Left = 573
-    Height = 609
+    Height = 614
     Top = 0
     Width = 596
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 609
+    ClientHeight = 614
     ClientWidth = 596
     TabOrder = 2
     object ListView2: TListView
       Left = 0
-      Height = 566
+      Height = 568
       Top = 23
       Width = 596
       Align = alClient
@@ -331,8 +331,8 @@ object Form1: TForm1
     end
     object StatusBar2: TStatusBar
       Left = 0
-      Height = 20
-      Top = 589
+      Height = 23
+      Top = 591
       Width = 596
       Panels = <      
         item
@@ -346,8 +346,8 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 20
-    Top = 609
+    Height = 23
+    Top = 614
     Width = 1169
     Panels = <    
       item
