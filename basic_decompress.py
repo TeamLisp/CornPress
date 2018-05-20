@@ -28,3 +28,5 @@ if len(sys.argv) > 2 :
 	compr.lets_multy(sys.argv[1:])
 else :
 	compr.lets_decomp(sys.argv[1])
+
+print "Your file is decornpressed!"
