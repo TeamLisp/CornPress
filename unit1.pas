@@ -221,9 +221,9 @@ begin
   CloseFile(iniFile);
 
   case funkc of
-    0,2: for i:=0 to ListView2.Items.Count-1 do
-         cmd := cmd + ' "' + ListView2.Items.Item[i].Caption + '"';
-    1,3: cmd := cmd + ' "' + ListView1.Items.Item[ListView1.ItemIndex].Caption + '"';
+    0     : for i:=0 to ListView2.Items.Count-1 do
+              cmd := cmd + ' "' + ListView2.Items.Item[i].Caption + '"';
+    1,2,3 : cmd := cmd + ' "' + ListView1.Items.Item[ListView1.ItemIndex].Caption + '"';
   end;
 
   ShowMessage(cmd);
@@ -237,7 +237,23 @@ begin
   //SynEdit1.lines       := AStringlist;
   cmd := '';
   for i:= 0 to AStringList.Count-1 do cmd := cmd + AStringList[i] + #13;
-  ShowMessage(cmd);
+  if cmd <> '' then
+    ShowMessage(cmd)
+  else
+      ShowMessage(
+        'Nem indult el az algoritmus, vagy az algoritmus nem adott vissza üzenetet.'+#13#10#13#10+
+        'Ellenőrizd:'+#13#10+
+        ' - van-e Python telepítve a gépedre'+#13#10+
+        ' - van-e a Python-hoz ZSTD könyvtár telepítve'+#13#10+
+        {$IFDEF WINDOWS}
+        ' - benne van-e a Python elérési útja a környezeti változók között'+#13#10+
+        ' - megfelelő-e a win.ini file beállítása'+
+        {$ENDIF}
+        {$IFDEF UNIX}
+        ' - megfelelő-e a unix.ini file beállítása'+
+        {$ENDIF}
+        ''
+      );
   AStringList.Free;
   AProcess.Free;
 
@@ -256,6 +272,7 @@ end;
 procedure TForm1.SpeedButton4Click(Sender: TObject);
 begin
   funkcio(2);
+  SpeedButton4.Enabled := False;
 end;
 
 function TForm1.FileSizeFormat(bytes:Double):string;
@@ -296,7 +313,6 @@ begin
     SpeedButton3.Enabled := True
   else
     SpeedButton3.Enabled := False;
-  SpeedButton4.Enabled := SpeedButton3.Enabled;
 end;
 
 procedure TForm1.ListView2DblClick(Sender: TObject);
@@ -401,13 +417,13 @@ begin
       3  : case QuestionDlg ('CornPress','Valóban ki akarod csomagolni ezt az állományt? '+#10#13#10#13+s,mtCustom,[mrNo, 'Nem', mrYes,'Igen', 'IsDefault'],'') of
              mrYes: begin
                       funkcio(1);
-                      QuestionDlg ('CornPress','Kész!',mtCustom,[mrOK,'OK'],'');
+                      //QuestionDlg ('CornPress','Kész!',mtCustom,[mrOK,'OK'],'');
                     end;
            end;
-      4  : case QuestionDlg ('CornPress','xD Valóban ki akarod csomagolni ezt az állományt? '+#10#13#10#13+s,mtCustom,[mrNo, 'Nem', mrYes,'Hát hogy a francba ne!', 'IsDefault'],'') of
+      4  : case QuestionDlg ('CornPress','Valóban vissza akarod alakítani ezt a csodálatos állományt zstd-re? '+#10#13#10#13+s,mtCustom,[mrNo, 'Nem', mrYes,'Hát hogy a francba ne!', 'IsDefault'],'') of
              mrYes: begin
                       funkcio(3);
-                      QuestionDlg ('CornPress','Kész!',mtCustom,[mrOK,'OK'],'');
+                      //QuestionDlg ('CornPress','Kész!',mtCustom,[mrOK,'OK'],'');
                     end;
            end;
     end;
@@ -419,6 +435,7 @@ begin
       Edit1.Text := copy(s,1,i);
     end;
   end;
+  SpeedButton4.Enabled := False;
 end;
 
 procedure TForm1.ListView1KeyDown(Sender: TObject; var Key: Word;
@@ -437,12 +454,17 @@ begin
     StatusBar1.Panels.Items[0].Text := ' '+IntToStr(c)+' elem';
     StatusBar1.Panels.Items[1].Text := ' '+IntToStr(ListView1.SelCount)+' kijelölt elem';
     SpeedButton1.Enabled:=True;
+    if (ListView1.SelCount = 1) and (ListView1.Selected.ImageIndex = 3) then
+      SpeedButton4.Enabled := True
+    else
+      SpeedButton4.Enabled := False;
   end
   else begin
     StatusBar1.Panels.Items[0].Text := ' '+IntToStr(c)+' elem';
     StatusBar1.Panels.Items[1].Text := '';
     SpeedButton1.Enabled:=False;
   end;
+//  if ListView1.i;
 end;
 
 end.
