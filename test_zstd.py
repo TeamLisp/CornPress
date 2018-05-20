@@ -65,10 +65,13 @@ class ZstdTestCase(unittest.TestCase):
             zstd_lines = non_ascii.readlines()
         self.assertEquals(test_lines, zstd_lines)
 
-	def test_extender(self):
-		os.system("cp test/cornpress.zstd test/non_cornpress.zstd")
+    def test_extender(self):
+        if self.windows :
+            os.system("cp test/cornpress.zstd test/non_cornpress.zstd")
+        else :
+            os.system("copy test/cornpress.zstd test/non_cornpress.zstd")
         self.ext.cornpress("test/cornpress.zstd", 0)
-        os.system("rm test/cornpress.zstd")
+        os.remove("test/cornpress.zstd")
         self.deextender.decornpress("test/cornpress.cp", "test/cornpress.zstd")
         
         with open("test/non_cornpress.zstd", "rb") as non_cornpress:
