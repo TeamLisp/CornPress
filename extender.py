@@ -18,7 +18,6 @@ class Extender:
 		
 		os.rename(infile, (os.path.dirname(infile) + "\\" + (os.path.splitext(os.path.basename(infile))[0]) + ".cp"))
 
-
 if __name__ == '__main__':
 	ext = Extender();
 	ext.cornpress(sys.argv[1], sys.argv[2])

@@ -3,7 +3,8 @@ import unittest
 import os
 import basic_conpress as compress
 import basic_decompress as decompress
-
+import extender as ext
+import deextender as deext
 
 class ZstdTestCase(unittest.TestCase):
     comp = compress.ZstdCompresser()
@@ -52,6 +53,19 @@ class ZstdTestCase(unittest.TestCase):
         
         with open("test/non_ascii", "rb") as non_ascii:
             zstd_lines = non_ascii.readlines()
+        self.assertEquals(test_lines, zstd_lines)
+
+	def test_extender(self):
+		os.system("cp test/cornpress.zstd test/non_cornpress.zstd")
+        self.ext.cornpress("test/cornpress.zstd", 0)
+        os.system("rm test/cornpress.zstd")
+        self.deextender.decornpress("test/cornpress.cp", "test/cornpress.zstd")
+        
+        with open("test/non_cornpress.zstd", "rb") as non_cornpress:
+            test_lines = non_cornpress.readlines()
+        
+        with open("test/cornpress.zstd", "rb") as cornpressed:
+            zstd_lines = cornpressed.readlines()
         self.assertEquals(test_lines, zstd_lines)
 
 if __name__ == '__main__':
